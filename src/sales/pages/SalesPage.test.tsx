@@ -5,33 +5,32 @@ import { render, screen } from "@testing-library/react";
 
 import i18n from "@/i18n";
 
-import { NewSalePage } from "./NewSalePage";
+import { SalesPage } from "./SalesPage";
 
 const queryClient = new QueryClient();
 
-describe("NewSalePage", () => {
-  test("renders NewSalePage with title and subtitle", () => {
+describe("SalesPage", () => {
+  test("renders SalesPage with title", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <I18nextProvider i18n={i18n}>
-          <NewSalePage />
+          <SalesPage />
         </I18nextProvider>
       </QueryClientProvider>,
     );
 
-    expect(screen.getByText("New Sale")).toBeInTheDocument();
-    expect(screen.getByText("Complete the following data to create a new contract")).toBeInTheDocument();
+    expect(screen.getByText("Clients")).toBeInTheDocument();
   });
 
-  test("renders NewSaleForm component", () => {
+  test("renders SalesTable component", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <I18nextProvider i18n={i18n}>
-          <NewSalePage />
+          <SalesPage />
         </I18nextProvider>
       </QueryClientProvider>,
     );
 
-    expect(screen.getByTestId("new-sale-form")).toBeInTheDocument();
+    expect(await screen.findByTestId("clients-table")).toBeInTheDocument();
   });
 });

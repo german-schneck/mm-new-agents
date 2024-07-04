@@ -9,7 +9,7 @@ import { SalesTable } from "../components/tables/SalesTable";
 export function SalesPage() {
   const { t } = useTranslation();
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 4, m: 4 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 4, m: 4 }} data-testid="sales-page">
       <Box>
         <Typography variant={"h5"} fontWeight="bold">
           {t("sales.list.title")}

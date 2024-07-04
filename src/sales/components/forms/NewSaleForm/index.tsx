@@ -44,14 +44,8 @@ export default function NewSaleForm({ onSubmit, isLoading }: NewSaleFormProps) {
           defaultValue={""}
           render={({ field }) => (
             <FormControl fullWidth>
-              <InputLabel id="client-sector-label">{t("forms.new_sale_form.bundle")}</InputLabel>
-              <Select
-                labelId="client-sector-label"
-                id="client-sector"
-                {...field}
-                label={t("forms.new_sale_form.bundle")}
-                fullWidth
-              >
+              <InputLabel id="bundle-label">{t("forms.new_sale_form.bundle")}</InputLabel>
+              <Select labelId="bundle-label" id="bundle" {...field} label={t("forms.new_sale_form.bundle")} fullWidth>
                 <MenuItem value="" disabled>
                   {t("forms.new_sale_form.select_bundle")}
                 </MenuItem>
@@ -290,7 +284,7 @@ export default function NewSaleForm({ onSubmit, isLoading }: NewSaleFormProps) {
   );
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} data-testid="new-sale-form">
       {renderBundleContainer}
       <Divider sx={{ my: 4 }} />
       {renderClientContainer}

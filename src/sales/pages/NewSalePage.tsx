@@ -12,7 +12,7 @@ export function NewSalePage() {
   const { handleCreateNewSale, createMutation } = useSalesController();
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 4, m: 4 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 4, m: 4 }} data-testid="new-sale-page">
       <Box>
         <Typography variant={"h5"} fontWeight="bold">
           {t("forms.new_sale_form.new_sale")}
