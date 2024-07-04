@@ -16,13 +16,6 @@ export const defaultTheme = createTheme({
     },
   },
   components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          color: "#fff",
-        },
-      },
-    },
     MuiChip: {
       styleOverrides: {
         root: {

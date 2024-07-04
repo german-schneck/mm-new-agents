@@ -1,6 +1,7 @@
 import { Theme, ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import { ModalProvider } from "./ModalProvider";
 import { queryClient as defaultQueryClient } from "../queryClient";
 import { defaultTheme } from "../theme/theme";
 
@@ -15,7 +16,9 @@ export function AppProviders({
 }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <ModalProvider>{children}</ModalProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
