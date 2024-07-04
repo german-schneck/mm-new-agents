@@ -19,6 +19,12 @@ const modals: Record<ModalsIds, React.FC<BaseModalProps<ModalData[ModalsIds]>>> 
 
 // * * * * * * * * * * * * *
 
+/**
+ * Properties for the ModalLayout component.
+ *
+ * @interface ModalLayoutProps
+ * @property {React.ReactNode} children - The child components to be rendered within the ModalLayout.
+ */
 interface ModalLayoutProps {
   readonly children: React.ReactNode;
 }
