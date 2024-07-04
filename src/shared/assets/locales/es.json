@@ -1,6 +1,9 @@
 {
   "translation": {
     "shared.error.page.permissions": "No tienes permisos para acceder a esta página.",
-    "shared.all": "Todos"
+    "shared.all": "Todos",
+
+    "navigator.clients": "Clientes",
+    "navigator.new_sale": "Nueva Venta"
   }
 }

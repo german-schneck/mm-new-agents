@@ -28,10 +28,10 @@ export function SalesTable() {
         <Table size="small" data-testid="clients-table">
           <TableHead>
             <TableRow>
-              <TableCell>Numero de pedido</TableCell>
-              <TableCell>Suscripcion</TableCell>
-              <TableCell>Numero cliente</TableCell>
-              <TableCell>Fecha venta</TableCell>
+              <TableCell>{t("sales.table.order_number")}</TableCell>
+              <TableCell>{t("sales.table.subscription")}</TableCell>
+              <TableCell>{t("sales.table.client_number")}</TableCell>
+              <TableCell>{t("sales.table.sale_date")}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
