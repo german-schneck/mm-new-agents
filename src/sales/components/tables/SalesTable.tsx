@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@mui/material";
-import { CircularProgress } from "@mui/material";
+import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
+import CircularProgress from "@mui/material/CircularProgress";
 import Pagination from "@mui/material/Pagination";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -56,7 +56,7 @@ export function SalesTable() {
       )}
 
       <Pagination
-        count={sales?.pagination.count || 0}
+        count={sales?.pagination.count ?? 0}
         page={page}
         onChange={handleOnPaginationChange}
         sx={{

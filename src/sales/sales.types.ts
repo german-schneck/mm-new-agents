@@ -21,7 +21,7 @@ export interface Sale {
   bundle: Bundle;
   client: Client;
   payment: {
-    tyoe: PaymentType;
+    type: PaymentType;
     clientToBill: Client;
     bankAccount: string;
   };

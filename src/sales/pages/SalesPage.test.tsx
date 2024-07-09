@@ -1,36 +1,22 @@
-import { I18nextProvider } from "react-i18next";
-
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
 
-import i18n from "@/i18n";
-
 import { SalesPage } from "./SalesPage";
-
-const queryClient = new QueryClient();
-
+import { TestProviders } from "../../../test/tests.helpers";
 describe("SalesPage", () => {
-  test("renders SalesPage with title", () => {
+  const renderSalesPage = () =>
     render(
-      <QueryClientProvider client={queryClient}>
-        <I18nextProvider i18n={i18n}>
-          <SalesPage />
-        </I18nextProvider>
-      </QueryClientProvider>,
+      <TestProviders>
+        <SalesPage />
+      </TestProviders>,
     );
 
+  test("renders SalesPage with title", () => {
+    renderSalesPage();
     expect(screen.getByText("Clients")).toBeInTheDocument();
   });
 
   test("renders SalesTable component", async () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <I18nextProvider i18n={i18n}>
-          <SalesPage />
-        </I18nextProvider>
-      </QueryClientProvider>,
-    );
-
+    renderSalesPage();
     expect(await screen.findByTestId("clients-table")).toBeInTheDocument();
   });
 });

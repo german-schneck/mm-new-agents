@@ -20,7 +20,7 @@ import { SectorTypes, ClientIdentityTypes, ClientGenderTypes } from "@/clients/c
 import { newSaleSchema } from "./schema";
 import { NewSaleFormValues, NewSaleFormProps } from "./types";
 
-export default function NewSaleForm({ onSubmit, isLoading }: NewSaleFormProps) {
+export default function NewSaleForm({ onSubmit, isLoading }: Readonly<NewSaleFormProps>) {
   const { t } = useTranslation();
   const { handleSubmit, control, formState } = useForm<NewSaleFormValues>({
     resolver: zodResolver(newSaleSchema),
@@ -41,7 +41,7 @@ export default function NewSaleForm({ onSubmit, isLoading }: NewSaleFormProps) {
         <Controller
           name="bundle"
           control={control}
-          defaultValue={""}
+          defaultValue={undefined}
           render={({ field }) => (
             <FormControl fullWidth>
               <InputLabel id="bundle-label">{t("forms.new_sale_form.bundle")}</InputLabel>
@@ -77,7 +77,7 @@ export default function NewSaleForm({ onSubmit, isLoading }: NewSaleFormProps) {
         <Controller
           name="client.sector"
           control={control}
-          defaultValue={""}
+          defaultValue={undefined}
           render={({ field, fieldState: { error } }) => (
             <FormControl fullWidth error={!!error}>
               <InputLabel id="client-sector-label">{t("forms.new_sale_form.sector")}</InputLabel>
@@ -119,7 +119,7 @@ export default function NewSaleForm({ onSubmit, isLoading }: NewSaleFormProps) {
           <Controller
             name="client.type"
             control={control}
-            defaultValue={""}
+            defaultValue={undefined}
             render={({ field, fieldState: { error } }) => (
               <FormControl fullWidth error={!!error}>
                 <InputLabel id="client-type-label">{t("forms.new_sale_form.identity_type")}</InputLabel>
@@ -178,7 +178,7 @@ export default function NewSaleForm({ onSubmit, isLoading }: NewSaleFormProps) {
         <Controller
           name="client.gender"
           control={control}
-          defaultValue={""}
+          defaultValue={undefined}
           render={({ field, fieldState: { error } }) => (
             <FormControl fullWidth error={!!error}>
               <InputLabel id="client-gender-label">{t("forms.new_sale_form.gender")}</InputLabel>

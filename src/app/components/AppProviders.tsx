@@ -1,7 +1,7 @@
 import { Theme, ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { ModalProvider } from "./ModalProvider";
+import { ModalProvider } from "../modals/ModalProvider";
 import { queryClient as defaultQueryClient } from "../queryClient";
 import { defaultTheme } from "../theme/theme";
 

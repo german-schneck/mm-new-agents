@@ -6,9 +6,9 @@ import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
-import { ModalsIds } from "@/lib/modals/types";
-import { useModal } from "@/lib/modals/useModal";
+import { useModal } from "@/app/modals/hooks/useModal";
 
+import { ModalsIds } from "../../app/modals/modals.types";
 import { SalesTable } from "../components/tables/SalesTable";
 
 export function SalesPage() {
@@ -16,22 +16,14 @@ export function SalesPage() {
   const { openModal } = useModal();
 
   /**
-   * Opens a warning modal with a predefined title and message.
+   * Opens the example modal with a predefined ID.
+   *
+   * @function handleClickOpenExampleModal
+   * @returns {void}
    */
-  const handleClickOpenWarningModal = () =>
-    openModal(ModalsIds.WARNING, {
-      title: "Mensaje de advertencia",
-      message:
-        "Este es un mensaje de advertencia de prueba, puede ser totalmente personalizado en base a la necesidad.",
-    });
-
-  /**
-   * Opens an error modal with a predefined title and message.
-   */
-  const handleClickOpenErrorModal = () =>
-    openModal(ModalsIds.ERROR, {
-      title: "Mensaje de error",
-      message: "Este es un mensaje de error, puede ser customizado segun necesidad.",
+  const handleClickOpenExampleModal = () =>
+    openModal(ModalsIds.EXAMPLE_MODAL, {
+      id: 213552,
     });
 
   return (
@@ -43,11 +35,8 @@ export function SalesPage() {
       </Box>
       <Paper sx={{ p: 4 }}>
         <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
-          <Button variant="contained" color="warning" onClick={handleClickOpenWarningModal}>
-            Open Warning Modal
-          </Button>
-          <Button variant="contained" color="error" onClick={handleClickOpenErrorModal}>
-            Open Error Modal
+          <Button variant="contained" color="warning" onClick={handleClickOpenExampleModal}>
+            Open Example Modal
           </Button>
         </Box>
 

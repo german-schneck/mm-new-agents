@@ -9,7 +9,7 @@ export const newSaleSchema = z.object({
     sector: z.nativeEnum(SectorTypes),
     dni: z
       .string()
-      .regex(/^[0-9]{8}[A-Z]$/, { message: "forms.new_sale_form.validation.dni" })
+      .regex(/^\d{8}[A-Z]$/, { message: "forms.new_sale_form.validation.dni" })
       .min(1, { message: "forms.new_sale_form.validation.dni_required" }),
     type: z.nativeEnum(ClientIdentityTypes),
     firstName: z.string().min(1, { message: "forms.new_sale_form.validation.first_name_required" }),
