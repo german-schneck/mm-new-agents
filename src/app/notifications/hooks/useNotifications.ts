@@ -1,16 +1,23 @@
 import { create } from "zustand";
 
-import { Toast, Dialog, NotificationsState, NotificationTypes, NotificationData } from "../notifications.types";
+import {
+  Toast,
+  Dialog,
+  NotificationsState,
+  NotificationTypes,
+  NotificationOpenData,
+  NotificationCloseData,
+} from "../notifications.types";
 
 /**
  * The initial state for the notifications.
  *
  * @type {NotificationsState}
- * @property {Toast[]} toasts - The list of toast notifications, initially an empty array.
+ * @property {Record<string, Toast>} toasts - The record of toast notifications, initially an empty object.
  * @property {Dialog | null} dialog - The dialog notification, initially set to null.
  */
 const initialState: NotificationsState = {
-  toasts: [],
+  toasts: {},
   dialog: null,
 };
 
@@ -18,12 +25,12 @@ const initialState: NotificationsState = {
  * Type representing the properties and methods for the useNotification hook.
  *
  * @extends {NotificationsState}
- * @property {<K extends NotificationTypes>(id: K, data: NotificationData[K]) => void} createNotification - Function to create a notification with specified identifier and data.
- * @property {() => void} closeNotification - Function to close the currently open notification and reset the state.
+ * @property {<K extends NotificationTypes>(id: K, data: NotificationOpenData[K]) => void} createNotification - Function to create a notification with specified identifier and data.
+ * @property {<K extends NotificationTypes>(id: K, data: NotificationCloseData[K]) => void} closeNotification - Function to close the specified notification.
  */
 type UseNotificationProps = NotificationsState & {
-  createNotification: <K extends NotificationTypes>(id: K, data: NotificationData[K]) => void;
-  closeNotification: () => void;
+  createNotification: <K extends NotificationTypes>(id: K, data: NotificationOpenData[K]) => void;
+  closeNotification: <K extends NotificationTypes>(id: K, data?: NotificationCloseData[K]) => void;
 };
 
 /**
@@ -31,19 +38,18 @@ type UseNotificationProps = NotificationsState & {
  *
  * Provides functionality to create and close notifications with associated data.
  *
- * @returns {{ toasts: Toast[], dialog: Dialog | null, createNotification: <K extends NotificationTypes>(id: K, data: NotificationData[K]) => void, closeNotification: () => void }} The notification state and control methods.
+ * @returns {UseNotificationProps} The notification state and control methods.
  */
 export const useNotifications = create<UseNotificationProps>((set) => ({
-  toasts: [],
-  dialog: null,
+  ...initialState,
 
   /**
    * Creates a notification with specified identifier and data.
    *
    * @param {K} id - The identifier of the notification to create.
-   * @param {NotificationData[K]} data - The data to associate with the notification.
+   * @param {NotificationOpenData[K]} data - The data to associate with the notification.
    */
-  createNotification: <K extends NotificationTypes>(id: K, data: NotificationData[K]) =>
+  createNotification: <K extends NotificationTypes>(id: K, data: NotificationOpenData[K]) =>
     set((currentState) => {
       switch (id) {
         case NotificationTypes.DIALOG:
@@ -51,24 +57,50 @@ export const useNotifications = create<UseNotificationProps>((set) => ({
             ...currentState,
             dialog: data as Dialog,
           };
-        case NotificationTypes.TOAST:
+        case NotificationTypes.TOAST: {
+          const toastId = crypto.randomUUID();
           return {
             ...currentState,
-            toasts: [
+            toasts: {
               ...currentState.toasts,
-              {
-                id: crypto.randomUUID(),
+              [toastId]: {
+                id: toastId,
                 ...data,
-              } as Toast,
-            ],
+              },
+            },
           };
+        }
+
         default:
           return currentState;
       }
     }),
 
   /**
-   * Closes the currently open notification and resets the state.
+   * Closes the specified notification.
+   *
+   * @param {K} id - The identifier of the notification to close.
+   * @param {NotificationCloseData[K]} data - The data to identify the notification to close.
    */
-  closeNotification: () => set(() => ({ ...initialState })),
+  closeNotification: <K extends NotificationTypes>(id: K, data?: NotificationCloseData[K]) =>
+    set((currentState) => {
+      switch (id) {
+        case NotificationTypes.DIALOG:
+          return {
+            ...currentState,
+            dialog: null,
+          };
+        case NotificationTypes.TOAST: {
+          const toastId = data as Toast["id"];
+          const newToasts = { ...currentState.toasts };
+          delete newToasts[toastId];
+          return {
+            ...currentState,
+            toasts: newToasts,
+          };
+        }
+        default:
+          return currentState;
+      }
+    }),
 }));

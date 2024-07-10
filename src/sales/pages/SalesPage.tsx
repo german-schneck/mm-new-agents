@@ -7,13 +7,16 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
 import { useModal } from "@/app/modals/hooks/useModal";
+import { ModalsIds } from "@/app/modals/modals.types";
+import { useNotifications } from "@/app/notifications/hooks/useNotifications";
 
-import { ModalsIds } from "../../app/modals/modals.types";
+import { NotificationTypes } from "../../app/notifications/notifications.types";
 import { SalesTable } from "../components/tables/SalesTable";
 
 export function SalesPage() {
   const { t } = useTranslation();
   const { openModal } = useModal();
+  const { createNotification } = useNotifications();
 
   /**
    * Opens the example modal with a predefined ID.
@@ -24,6 +27,50 @@ export function SalesPage() {
   const handleClickOpenExampleModal = () =>
     openModal(ModalsIds.EXAMPLE_MODAL, {
       id: 213552,
+    });
+
+  /**
+   * Creates a toast notification with a predefined title and message.
+   *
+   * @function handleClickCreateToast
+   * @returns {void}
+   */
+  const handleClickCreateToast = () =>
+    createNotification(NotificationTypes.TOAST, {
+      title: "Test Toast",
+      message: "This is a test toast, it can be customizable.",
+    });
+
+  /**
+   * Creates a dialog notification with a predefined title and message.
+   *
+   * @function handleClickCreateDialog
+   * @returns {void}
+   */
+  const handleClickCreateDialog = () =>
+    createNotification(NotificationTypes.DIALOG, {
+      title: "Title of the dialog",
+      message: "Are you sure you want to close this dialog?",
+      onConfirm: {
+        text: "Confirm",
+        handler: ({ closeDialog }) => {
+          closeDialog();
+          createNotification(NotificationTypes.TOAST, {
+            title: "Dialog confirmed",
+            message: "The necessary actions will be executed.",
+          });
+        },
+      },
+      onCancel: {
+        text: "Cancel",
+        handler: ({ closeDialog }) => {
+          closeDialog();
+          createNotification(NotificationTypes.TOAST, {
+            title: "Dialog canceled",
+            message: "The intended actions will not be executed.",
+          });
+        },
+      },
     });
 
   return (
@@ -37,6 +84,14 @@ export function SalesPage() {
         <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
           <Button variant="contained" color="warning" onClick={handleClickOpenExampleModal}>
             Open Example Modal
+          </Button>
+
+          <Button variant="contained" color="warning" onClick={handleClickCreateToast}>
+            Create a Toast
+          </Button>
+
+          <Button variant="contained" color="warning" onClick={handleClickCreateDialog}>
+            Create a Dialog
           </Button>
         </Box>
 

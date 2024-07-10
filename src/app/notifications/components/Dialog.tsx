@@ -7,31 +7,40 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-import type { Dialog as DialogType } from "../notifications.types";
+import type { BaseNotificationProps, Dialog as DialogType } from "../notifications.types";
 
-/**
- * Dialog component to display a dialog notification.
- *
- * @param {Readonly<DialogType>} props - The properties for the Dialog component.
- * @param {string} props.title - The title of the dialog notification.
- * @param {string} props.message - The message content of the dialog notification.
- * @param {() => void} props.onConfirm - The function to call when the dialog is confirmed.
- * @param {() => void} [props.onCancel] - Optional function to call when the dialog is canceled.
- * @returns {JSX.Element} The rendered Dialog component.
- */
-export const DialogComponent: React.FC<Readonly<DialogType>> = ({ title, message, onConfirm, onCancel }) => {
+export const DialogComponent: React.FC<BaseNotificationProps<DialogType>> = ({
+  title,
+  message,
+  onConfirm,
+  onCancel,
+  handleClose: closeDialog,
+}) => {
+  /**
+   * Callback properties to be passed to the handler functions.
+   * @property {Function} handleClose - Function to handle the closing of the dialog.
+   */
+  const handlerCallbackProps = {
+    closeDialog,
+  };
+
   return (
-    <Dialog open={true} onClose={onCancel} aria-labelledby="dialog-title" aria-describedby="dialog-description">
+    <Dialog open={true} onClose={onCancel.handler} aria-labelledby="dialog-title" aria-describedby="dialog-description">
       <DialogTitle id="dialog-title">{title}</DialogTitle>
       <DialogContent>
         <DialogContentText id="dialog-description">{message}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onCancel} color="primary">
-          Cancel
+        <Button onClick={onCancel.handler.bind(null, handlerCallbackProps)} color="primary">
+          {onCancel.text}
         </Button>
-        <Button onClick={onConfirm} color="primary" autoFocus>
-          Confirm
+        <Button
+          onClick={onConfirm.handler.bind(null, handlerCallbackProps)}
+          variant={"contained"}
+          color="primary"
+          autoFocus
+        >
+          {onConfirm.text}
         </Button>
       </DialogActions>
     </Dialog>
