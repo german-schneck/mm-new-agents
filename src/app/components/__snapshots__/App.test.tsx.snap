@@ -2,6 +2,9 @@
 
 exports[`App > should render login by default 1`] = `
 <div>
+  <ul
+    class="MuiBox-root css-q8saj4"
+  />
   <main
     class="MuiGrid-root MuiGrid-container css-1jrn2fe-MuiGrid-root"
     data-testid="login-page"
