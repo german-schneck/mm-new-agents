@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import { SalesPage } from "./SalesPage";
 import { TestProviders } from "../../../test/tests.helpers";
+
 describe("SalesPage", () => {
   const renderSalesPage = () =>
     render(

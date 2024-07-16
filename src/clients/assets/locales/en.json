@@ -1,0 +1,15 @@
+{
+  "translation": {
+    "validations.client.dni": "The DNI must be a valid Spanish DNI",
+    "validations.client.dni_required": "The DNI is required",
+    "validations.client.first_name_required": "The first name is required",
+    "validations.client.last_name_required": "The last name is required",
+    "validations.client.country_required": "The country is required",
+    "validations.client.language_required": "The language is required",
+    "validations.client.phone_number": "The phone number must be valid",
+    "validations.client.phone_number_required": "The phone number is required",
+    "validations.client.email_address": "The email address must be valid",
+    "validations.client.email_address_required": "The email address is required",
+    "validations.client.physical_address_required": "The physical address is required"
+  }
+}

@@ -30,7 +30,7 @@ export const ExampleModal: React.FC<BaseModalProps<ExampleModalData>> = ({ id, h
           This is an example modal
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          It is fully customizable to your liking. An ID ${id} has been passed to it.
+          It is fully customizable to your liking. An ID {id} has been passed to it.
         </Typography>
       </Box>
     </Modal>

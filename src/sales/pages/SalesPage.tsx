@@ -26,7 +26,7 @@ export function SalesPage() {
    */
   const handleClickOpenExampleModal = () =>
     openModal(ModalsIds.EXAMPLE_MODAL, {
-      id: 213552,
+      id: 100,
     });
 
   /**

@@ -1,0 +1,16 @@
+{
+  "translation": {
+    "validations.client.dni": "El DNI debe ser un DNI español válido",
+    "validations.client.dni_required": "El DNI es obligatorio",
+    "validations.client.first_name_required": "El nombre es obligatorio",
+    "validations.client.last_name_required": "El apellido es obligatorio",
+    "validations.client.country_required": "El país es obligatorio",
+    "validations.client.language_required": "El idioma es obligatorio",
+    "validations.client.phone_number": "El número de teléfono debe ser válido",
+    "validations.client.phone_number_required": "El número de teléfono es obligatorio",
+    "validations.client.email_address": "El correo electrónico debe ser válido",
+    "validations.client.email_address_required": "La dirección de correo electrónico es obligatoria",
+    "validations.client.physical_address_required": "La dirección física es obligatoria"
+  }
+}
+
