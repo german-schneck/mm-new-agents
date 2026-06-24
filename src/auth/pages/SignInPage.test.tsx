@@ -24,11 +24,11 @@ describe("SignInPage", () => {
     expect(container).toMatchSnapshot();
   });
 
-  it("should navigate to /admin/dashboard", async () => {
+  it("should navigate to /sales", async () => {
     render(<TestApp initialEntries={["/login"]} />);
 
     await act(() => userEvent.click(screen.getByText("Sign In")));
 
-    expect(screen.getByTestId("dashboard-page")).toBeInTheDocument();
+    expect(screen.getByTestId("sales-page")).toBeInTheDocument();
   });
 });
